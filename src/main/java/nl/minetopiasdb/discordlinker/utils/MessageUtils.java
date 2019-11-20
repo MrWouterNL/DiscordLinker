@@ -16,7 +16,7 @@ public class MessageUtils {
                 .setColor(c);
     }
 
-    public void sendPrivateAndCheckIfCanReceive(MessageChannel channel, User user, EmbedBuilder builder) {
+    public static void sendPrivateAndCheckIfCanReceive(MessageChannel channel, User user, EmbedBuilder builder) {
         user.openPrivateChannel().queue((privateChannel) -> {
             privateChannel.sendMessage(builder.build()).queue();
         }, new DirectMessageConsumer<Throwable>(user, channel));
