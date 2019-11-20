@@ -23,12 +23,12 @@ public class ConfigUtils {
 		plug.getConfig().addDefault("Discord.CommandPrefix", "mt!");
 		plug.getConfig().addDefault("Discord.BotToken", "VUL HIER JE BOTTOKEN IN!");
 		
-		// Status: DND, IDLE, ONLINE, INVISIBLE
+		// Status: DO_NOT_DISTURB, IDLE, ONLINE, INVISIBLE
 		// ActivityType: PLAYING, LISTENING, WATCHING, STREAMING
 		
-		plug.getConfig().set("Discord.Playing.StatusUitleg", "Mogelijke opties: ONLINE, DND, IDLE, INVISIBLE");
+		plug.getConfig().set("Discord.Playing.StatusUitleg", "Mogelijke opties: ONLINE, DO_NOT_DISTURB, IDLE, INVISIBLE");
 		plug.getConfig().addDefault("Discord.Playing.Status", "ONLINE");
-		plug.getConfig().set("Discord.Playing.TypeUitleg", "Mogelijke opties: PLAYING, LISTENINg, WATCHING, STREAMING");
+		plug.getConfig().set("Discord.Playing.TypeUitleg", "Mogelijke opties: PLAYING, LISTENING, WATCHING, STREAMING");
 		plug.getConfig().addDefault("Discord.Playing.Type", "WATCHING");
 		plug.getConfig().addDefault("Discord.Playing.Message", "Naar <Spelers> spelers ");
 		
@@ -90,7 +90,7 @@ public class ConfigUtils {
 	}
 	
 	public String getLogo() {
-		return Main.getBot().getApplicationIconURL() == null ? "https://content.minetopiasdb.nl/SDBLogo.png" : Main.getBot().getApplicationIconURL();
+		return Main.getBot().getSelfUser().getAvatarUrl() == null ? "https://content.minetopiasdb.nl/SDBLogo.png" : Main.getBot().getSelfUser().getAvatarUrl();
 	}
 
 	public boolean getShowOption(ShowOption opt) {
