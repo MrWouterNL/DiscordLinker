@@ -31,6 +31,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>mrwouter-repo</id>
+            <url>https://repo.mrwouter.nl/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -50,6 +54,13 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>nl.mrwouter</groupId>
+            <artifactId>minetopiasdb</artifactId>
+            <version>1.28.1</version>
+            <type>jar</type>
             <scope>provided</scope>
         </dependency>
     </dependencies>
