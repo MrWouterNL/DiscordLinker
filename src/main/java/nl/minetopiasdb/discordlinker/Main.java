@@ -13,6 +13,8 @@ import nl.minetopiasdb.discordlinker.discord.commands.HelpCMD;
 import nl.minetopiasdb.discordlinker.discord.commands.ServerinfoCMD;
 import nl.minetopiasdb.discordlinker.discord.commands.StatCMD;
 import nl.minetopiasdb.discordlinker.utils.UpdateChecker;
+import nl.minetopiasdb.discordlinker.utils.commands.Command;
+import nl.minetopiasdb.discordlinker.utils.commands.CommandFactory;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import nl.minetopiasdb.discordlinker.utils.data.UserData;
 import org.apache.commons.io.FileUtils;
@@ -127,10 +129,10 @@ public class Main extends JavaPlugin {
                 .setActivity(Activity.playing("loading"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
 
-        bot.addEventListener(new DiscordLinkCMD());
-        bot.addEventListener(new StatCMD());
-        bot.addEventListener(new ServerinfoCMD());
-        bot.addEventListener(new HelpCMD());
+        CommandFactory.getInstance().registerCommand("link", new DiscordLinkCMD());
+        CommandFactory.getInstance().registerCommand("stats", new StatCMD());
+        CommandFactory.getInstance().registerCommand("server", new ServerinfoCMD());
+        CommandFactory.getInstance().registerCommand("help", new HelpCMD());
 
         try {
             bot = builder.build();
