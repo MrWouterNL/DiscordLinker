@@ -8,10 +8,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.managers.Presence;
 import nl.minetopiasdb.discordlinker.bukkit.commands.LinkCMD;
 import nl.minetopiasdb.discordlinker.bukkit.listeners.JoinListener;
-import nl.minetopiasdb.discordlinker.discord.commands.DiscordLinkCMD;
-import nl.minetopiasdb.discordlinker.discord.commands.HelpCMD;
-import nl.minetopiasdb.discordlinker.discord.commands.ServerinfoCMD;
-import nl.minetopiasdb.discordlinker.discord.commands.StatCMD;
+import nl.minetopiasdb.discordlinker.discord.commands.*;
 import nl.minetopiasdb.discordlinker.utils.UpdateChecker;
 import nl.minetopiasdb.discordlinker.utils.commands.Command;
 import nl.minetopiasdb.discordlinker.utils.commands.CommandFactory;
@@ -130,6 +127,7 @@ public class Main extends JavaPlugin {
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
 
         CommandFactory.getInstance().registerCommand("link", new DiscordLinkCMD());
+        CommandFactory.getInstance().registerCommand("unlink", new DiscordUnlinkCMD());
         CommandFactory.getInstance().registerCommand("stats", new StatCMD());
         CommandFactory.getInstance().registerCommand("server", new ServerinfoCMD());
         CommandFactory.getInstance().registerCommand("help", new HelpCMD());
