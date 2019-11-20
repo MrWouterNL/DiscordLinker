@@ -40,8 +40,8 @@ public class LinkCMD implements CommandExecutor {
 		DataLinkUtils.getInstance().setLink(((Player) sender).getUniqueId(), userId);
 		String name = null;
 		LinkUtils.getInstance().removeLink(uuid);
-		if (Main.getBot().getUserByID(userId) != null) {
-			name = Main.getBot().getUserByID(userId).getName() + "#" + Main.getBot().getUserByID(userId).getDiscriminator();
+		if (Main.getBot().getUserById(userId) != null) {
+			name = Main.getBot().getUserById(userId).getName() + "#" + Main.getBot().getUserById(userId).getDiscriminator();
 			sender.sendMessage(ConfigUtils.cc("&3Succesvol jouw &bDiscord&3 account &b(&3" + name + "&b)&3 gelinked!"));
 			return true;
 		}
