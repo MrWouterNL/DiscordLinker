@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.utils.data;
+package nl.minetopiasdb.discordlinker.utils.data;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import nl.minetopiasdb.discordbot.Main;
+import nl.minetopiasdb.discordlinker.Main;
 
 
 public class UserData {

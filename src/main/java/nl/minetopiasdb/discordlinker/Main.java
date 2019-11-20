@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot;
+package nl.minetopiasdb.discordlinker;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -14,15 +14,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import nl.minetopiasdb.discordbot.bukkit.commands.LinkCMD;
-import nl.minetopiasdb.discordbot.bukkit.listeners.JoinListener;
-import nl.minetopiasdb.discordbot.discord.commands.DiscordLinkCMD;
-import nl.minetopiasdb.discordbot.discord.commands.HelpCMD;
-import nl.minetopiasdb.discordbot.discord.commands.ServerinfoCMD;
-import nl.minetopiasdb.discordbot.discord.commands.StatCMD;
-import nl.minetopiasdb.discordbot.utils.UpdateChecker;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
-import nl.minetopiasdb.discordbot.utils.data.UserData;
+import nl.minetopiasdb.discordlinker.bukkit.commands.LinkCMD;
+import nl.minetopiasdb.discordlinker.bukkit.listeners.JoinListener;
+import nl.minetopiasdb.discordlinker.discord.commands.DiscordLinkCMD;
+import nl.minetopiasdb.discordlinker.discord.commands.HelpCMD;
+import nl.minetopiasdb.discordlinker.discord.commands.ServerinfoCMD;
+import nl.minetopiasdb.discordlinker.discord.commands.StatCMD;
+import nl.minetopiasdb.discordlinker.utils.UpdateChecker;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.data.UserData;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.ActivityType;

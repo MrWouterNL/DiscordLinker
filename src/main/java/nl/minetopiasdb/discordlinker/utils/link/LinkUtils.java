@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.utils.link;
+package nl.minetopiasdb.discordlinker.utils.link;
 
 import java.util.HashMap;
 import java.util.UUID;

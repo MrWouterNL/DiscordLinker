@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.bukkit.commands;
+package nl.minetopiasdb.discordlinker.bukkit.commands;
 
 import java.util.UUID;
 
@@ -7,10 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import nl.minetopiasdb.discordbot.Main;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
-import nl.minetopiasdb.discordbot.utils.link.DataLinkUtils;
-import nl.minetopiasdb.discordbot.utils.link.LinkUtils;
+import nl.minetopiasdb.discordlinker.Main;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
+import nl.minetopiasdb.discordlinker.utils.link.LinkUtils;
 
 public class LinkCMD implements CommandExecutor {
 	

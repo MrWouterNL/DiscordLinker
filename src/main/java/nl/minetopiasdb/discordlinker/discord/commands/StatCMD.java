@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.discord.commands;
+package nl.minetopiasdb.discordlinker.discord.commands;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -12,11 +12,11 @@ import org.bukkit.plugin.Plugin;
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.SDBPlayer;
 import nl.minetopiasdb.api.enums.TimeType;
-import nl.minetopiasdb.discordbot.Main;
-import nl.minetopiasdb.discordbot.utils.MessageUtils;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils.ShowOption;
-import nl.minetopiasdb.discordbot.utils.link.DataLinkUtils;
+import nl.minetopiasdb.discordlinker.Main;
+import nl.minetopiasdb.discordlinker.utils.MessageUtils;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils.ShowOption;
+import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.Permissions;
@@ -71,7 +71,7 @@ public class StatCMD {
 				builder.appendField(cu.getShowTitle(ShowOption.LEVEL), "" + sdb.getLevel(), false);
 			}
 			if (cu.getShowOption(ShowOption.MONEY)) {
-				builder.appendField(cu.getShowTitle(ShowOption.MONEY), "€ " + format(API.getEcon().getBalance(p)), false);
+				builder.appendField(cu.getShowTitle(ShowOption.MONEY), "ï¿½ " + format(API.getEcon().getBalance(p)), false);
 			}
 			if (cu.getShowOption(ShowOption.ONLINETIME)) {
 				builder.appendField(cu.getShowTitle(ShowOption.ONLINETIME), "" + sdb.getTime(TimeType.DAYS) + " dagen, "

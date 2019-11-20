@@ -1,9 +1,9 @@
-package nl.minetopiasdb.discordbot.utils.data;
+package nl.minetopiasdb.discordlinker.utils.data;
 
 import org.bukkit.plugin.Plugin;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.minetopiasdb.discordbot.Main;
+import nl.minetopiasdb.discordlinker.Main;
 
 public class ConfigUtils {
 

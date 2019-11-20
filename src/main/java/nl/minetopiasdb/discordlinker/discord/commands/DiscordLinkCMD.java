@@ -1,12 +1,12 @@
-package nl.minetopiasdb.discordbot.discord.commands;
+package nl.minetopiasdb.discordlinker.discord.commands;
 
 import java.awt.Color;
 import java.util.UUID;
 
-import nl.minetopiasdb.discordbot.utils.MessageUtils;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
-import nl.minetopiasdb.discordbot.utils.link.DataLinkUtils;
-import nl.minetopiasdb.discordbot.utils.link.LinkUtils;
+import nl.minetopiasdb.discordlinker.utils.MessageUtils;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
+import nl.minetopiasdb.discordlinker.utils.link.LinkUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 

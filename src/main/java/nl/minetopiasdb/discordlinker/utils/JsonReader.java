@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.utils;
+package nl.minetopiasdb.discordlinker.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

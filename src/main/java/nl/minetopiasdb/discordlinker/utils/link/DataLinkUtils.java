@@ -1,8 +1,8 @@
-package nl.minetopiasdb.discordbot.utils.link;
+package nl.minetopiasdb.discordlinker.utils.link;
 
 import java.util.UUID;
 
-import nl.minetopiasdb.discordbot.utils.data.UserData;
+import nl.minetopiasdb.discordlinker.utils.data.UserData;
 
 public class DataLinkUtils {
 

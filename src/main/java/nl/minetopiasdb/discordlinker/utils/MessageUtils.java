@@ -1,8 +1,8 @@
-package nl.minetopiasdb.discordbot.utils;
+package nl.minetopiasdb.discordlinker.utils;
 
 import java.awt.Color;
 
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.util.EmbedBuilder;

@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.utils;
+package nl.minetopiasdb.discordlinker.utils;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import nl.minetopiasdb.discordbot.Main;
+import nl.minetopiasdb.discordlinker.Main;
 
 public class UpdateChecker implements Listener {
 
@@ -76,12 +76,12 @@ public class UpdateChecker implements Listener {
 	public void sendUpdateMessage(Player p) {
 		String name = Main.getPlugin().getDescription().getName();
 		String newver = getVersion();
-		p.sendMessage("   §3-=-=-=[§b" + name + "§3]=-=-=-   ");
-		p.sendMessage("§3Er is een update beschikbaar voor §b" + name + "§3!");
-		p.sendMessage("§3Je maakt nu gebruik van versie §b" + Main.getPlugin().getDescription().getVersion() + "§3.");
-		p.sendMessage("§3De nieuwste versie is §b" + newver);
-		p.sendMessage("§3Download deze versie van §bhttps://projects.minetopiasdb.nl/discordlinker/");
-		p.sendMessage("   §3-=-=-=[§b" + name + "§3]=-=-=-   ");
+		p.sendMessage("   ï¿½3-=-=-=[ï¿½b" + name + "ï¿½3]=-=-=-   ");
+		p.sendMessage("ï¿½3Er is een update beschikbaar voor ï¿½b" + name + "ï¿½3!");
+		p.sendMessage("ï¿½3Je maakt nu gebruik van versie ï¿½b" + Main.getPlugin().getDescription().getVersion() + "ï¿½3.");
+		p.sendMessage("ï¿½3De nieuwste versie is ï¿½b" + newver);
+		p.sendMessage("ï¿½3Download deze versie van ï¿½bhttps://projects.minetopiasdb.nl/discordlinker/");
+		p.sendMessage("   ï¿½3-=-=-=[ï¿½b" + name + "ï¿½3]=-=-=-   ");
 	}
 
 	@EventHandler

@@ -1,9 +1,9 @@
-package nl.minetopiasdb.discordbot.discord.commands;
+package nl.minetopiasdb.discordlinker.discord.commands;
 
 import java.awt.Color;
 
-import nl.minetopiasdb.discordbot.utils.MessageUtils;
-import nl.minetopiasdb.discordbot.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.MessageUtils;
+import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.util.EmbedBuilder;

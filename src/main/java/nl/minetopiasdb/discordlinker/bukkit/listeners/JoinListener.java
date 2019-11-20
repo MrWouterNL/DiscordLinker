@@ -1,4 +1,4 @@
-package nl.minetopiasdb.discordbot.bukkit.listeners;
+package nl.minetopiasdb.discordlinker.bukkit.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import nl.minetopiasdb.discordbot.Main;
+import nl.minetopiasdb.discordlinker.Main;
 
 public class JoinListener implements Listener {
 
