@@ -9,8 +9,8 @@ import net.dv8tion.jda.api.managers.Presence;
 import nl.minetopiasdb.discordlinker.bukkit.commands.LinkCMD;
 import nl.minetopiasdb.discordlinker.bukkit.listeners.JoinListener;
 import nl.minetopiasdb.discordlinker.discord.commands.*;
+import nl.minetopiasdb.discordlinker.discord.listeners.CommandListener;
 import nl.minetopiasdb.discordlinker.utils.UpdateChecker;
-import nl.minetopiasdb.discordlinker.utils.commands.Command;
 import nl.minetopiasdb.discordlinker.utils.commands.CommandFactory;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import nl.minetopiasdb.discordlinker.utils.data.UserData;
@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
         Presence presence = getBot().getPresence();
 
         presence.setStatus(OnlineStatus.valueOf(ConfigUtils.getInstance().getStatus()));
-        switch(ConfigUtils.getInstance().getPlayingType().toLowerCase()) {
+        switch (ConfigUtils.getInstance().getPlayingType().toLowerCase()) {
             case "playing":
                 presence.setActivity(Activity.playing(ConfigUtils.getInstance().getPlayingMessage().replaceAll("<Spelers>", "" + Bukkit.getOnlinePlayers().size())));
                 break;
@@ -125,6 +125,8 @@ public class Main extends JavaPlugin {
                 .setToken(token)
                 .setActivity(Activity.playing("loading"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
+
+        builder.addEventListeners(new CommandListener());
 
         CommandFactory.getInstance().registerCommand("link", new DiscordLinkCMD());
         CommandFactory.getInstance().registerCommand("unlink", new DiscordUnlinkCMD());
