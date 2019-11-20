@@ -135,7 +135,8 @@ public class Main extends JavaPlugin {
         try {
             bot = builder.build();
         } catch (Exception ex) {
-            if (ex.getMessage().contains("401: Unauthorized")) {
+            getLogger().info(ex.getMessage());
+            if (ex.getMessage().contains("The provided token is invalid")) {
                 Bukkit.getPluginManager().registerEvents(new Listener() {
                     @EventHandler
                     public void onJoin(PlayerJoinEvent e) {
