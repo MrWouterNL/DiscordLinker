@@ -1,47 +1,41 @@
 package nl.minetopiasdb.discordlinker.discord.commands;
 
-import java.awt.Color;
-import java.util.UUID;
-
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import nl.minetopiasdb.discordlinker.utils.MessageUtils;
-import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
+import nl.minetopiasdb.discordlinker.utils.commands.BotCommand;
+import nl.minetopiasdb.discordlinker.utils.commands.Command;
 import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
 import nl.minetopiasdb.discordlinker.utils.link.LinkUtils;
-import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
-public class DiscordLinkCMD {
+import java.awt.*;
+import java.util.UUID;
 
-	@EventSubscriber
-	public void onMessageRecive(MessageReceivedEvent e) {
-		// Double spaces can cause issues.
-		String msg = e.getMessage().getContent().replaceAll("  ", " ");
-		if (msg.startsWith(ConfigUtils.getInstance().getPrefix() + "link")) {
-			long id = e.getAuthor().getLongID();
-			if (DataLinkUtils.getInstance().isLinked(id)) {
-				MessageUtils.sendMessage(e.getChannel(),
-						MessageUtils.getBuilder("Je hebt jouw Discord Account al gelinked!", Color.RED));
-				return;
-			}
-			if (LinkUtils.getInstance().isValidLink(id)) {
-				LinkUtils.getInstance().removeLink(id);
-			}
-			UUID linkUUID = LinkUtils.getInstance().registerLink(id);
-			if (!MessageUtils.sendPrivateAndCheckIfCanReceive(e.getAuthor(),
-					MessageUtils
-							.getBuilder("Type het volgende commando in Minecraft om jouw account te linken: ```/link "
-									+ linkUUID.toString() + "```", Color.GREEN))) {
-				LinkUtils.getInstance().removeLink(linkUUID);
-				MessageUtils.sendMessage(e.getChannel(), MessageUtils.getBuilder(
-						e.getAuthor().mention() + ", je moet je priveberichten aan hebben staan!", Color.RED));
-			}
+public class DiscordLinkCMD implements BotCommand {
 
-		} else if (msg.startsWith(ConfigUtils.getInstance().getPrefix() + "unlink")) {
-			long id = e.getAuthor().getLongID();
-			LinkUtils.getInstance().removeLink(id);
-			DataLinkUtils.getInstance().removeLink(id);
-			MessageUtils.sendMessage(e.getChannel(), MessageUtils.getBuilder(
-					e.getAuthor().mention() + ", succesvol jouw Minecraft account unlinked!", Color.GREEN));
-		}
-	}
+    @Override
+    public void excecute(Command cmd, String[] args, Message msg, MessageReceivedEvent event) {
+        long id = event.getAuthor().getIdLong();
+        if (DataLinkUtils.getInstance().isLinked(id)) {
+            EmbedBuilder embed = MessageUtils.getBuilder(Color.RED)
+                    .setDescription("Je hebt je Discord account al gelinked!");
+            event.getChannel().sendMessage(embed.build()).queue();
+            return;
+        }
+        if (LinkUtils.getInstance().isValidLink(id)) {
+            LinkUtils.getInstance().removeLink(id);
+        }
+        UUID linkUUID = LinkUtils.getInstance().registerLink(id);
+
+        event.getAuthor().openPrivateChannel().queue((privateChannel) -> {
+            EmbedBuilder embed = MessageUtils.getBuilder(Color.GREEN)
+                    .setDescription("Type het volgende commando in Minecraft om jouw account te linken: ```/link " + linkUUID.toString() + "```");
+            privateChannel.sendMessage(embed.build()).queue();
+        }, (error) -> {
+            EmbedBuilder embed = MessageUtils.getBuilder(Color.RED).setDescription(event.getAuthor().getAsTag() + ", je moet je privéberichten aanzetten!");
+            event.getChannel().sendMessage(embed.build()).queue();
+            LinkUtils.getInstance().removeLink(linkUUID);
+        });
+    }
 }
