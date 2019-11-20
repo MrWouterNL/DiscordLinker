@@ -1,35 +1,39 @@
 package nl.minetopiasdb.discordlinker.discord.commands;
 
-import java.awt.Color;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import nl.minetopiasdb.discordlinker.utils.commands.BotCommand;
-import nl.minetopiasdb.discordlinker.utils.commands.Command;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.Plugin;
-
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.SDBPlayer;
 import nl.minetopiasdb.api.enums.TimeType;
 import nl.minetopiasdb.discordlinker.Main;
 import nl.minetopiasdb.discordlinker.utils.MessageUtils;
+import nl.minetopiasdb.discordlinker.utils.commands.BotCommand;
+import nl.minetopiasdb.discordlinker.utils.commands.Command;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils.ShowOption;
 import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.Plugin;
+
+import java.awt.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class StatCMD implements BotCommand {
+
+    public static String format(double number) {
+        DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.GERMAN);
+        return df.format(number);
+    }
 
     @Override
     public void excecute(Command cmd, String[] args, Message msg, MessageReceivedEvent event) {
         long userId = event.getAuthor().getIdLong();
-        if(event.getMessage().getMentions(Message.MentionType.USER).size() > 0 && event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+        if (event.getMessage().getMentions(Message.MentionType.USER).size() > 0 && event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
             userId = event.getMessage().getMentions(Message.MentionType.USER).get(0).getIdLong();
         }
         if (!DataLinkUtils.getInstance().isLinked(userId)) {
@@ -91,9 +95,4 @@ public class StatCMD implements BotCommand {
 
         event.getChannel().sendMessage(embed.build()).queue();
     }
-
-	public static String format(double number) {
-		DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.GERMAN);
-		return df.format(number);
-	}
 }
