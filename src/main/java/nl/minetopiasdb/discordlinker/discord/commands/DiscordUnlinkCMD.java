@@ -24,7 +24,7 @@ public class DiscordUnlinkCMD implements BotCommand {
         LinkUtils.getInstance().removeLink(id);
         DataLinkUtils.getInstance().removeLink(id);
         EmbedBuilder embed = MessageUtils.getBuilder(Color.GREEN)
-                .setDescription(event.getAuthor().getAsTag() + ", je Discord account is succesvol geunlinked");
+                .setDescription(event.getAuthor().getAsMention() + ", je Discord account is succesvol geunlinked");
         event.getChannel().sendMessage(embed.build()).queue();
     }
 }

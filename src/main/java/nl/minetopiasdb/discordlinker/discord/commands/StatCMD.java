@@ -38,7 +38,7 @@ public class StatCMD implements BotCommand {
         }
         if (!DataLinkUtils.getInstance().isLinked(userId)) {
             if (userId == event.getAuthor().getIdLong()) {
-                EmbedBuilder embed = MessageUtils.getBuilder(Color.RED).setDescription(event.getAuthor().getAsTag() + ", je hebt je Discord account nog niet gelinked!");
+                EmbedBuilder embed = MessageUtils.getBuilder(Color.RED).setDescription(event.getAuthor().getAsMention() + ", je hebt je Discord account nog niet gelinked!");
                 event.getChannel().sendMessage(embed.build()).queue();
             } else {
                 if (Main.getBot().getUserById(userId) != null) {
