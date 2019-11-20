@@ -5,6 +5,12 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import nl.minetopiasdb.discordlinker.utils.commands.BotCommand;
+import nl.minetopiasdb.discordlinker.utils.commands.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
@@ -17,75 +23,74 @@ import nl.minetopiasdb.discordlinker.utils.MessageUtils;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils.ShowOption;
 import nl.minetopiasdb.discordlinker.utils.link.DataLinkUtils;
-import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.obj.Permissions;
-import sx.blah.discord.util.EmbedBuilder;
 
-public class StatCMD {
+public class StatCMD implements BotCommand {
 
-	@EventSubscriber
-	public void onMessageRecive(MessageReceivedEvent e) {
-		String msg = e.getMessage().getContent().replaceAll("  ", " ");
-		if (msg.startsWith(ConfigUtils.getInstance().getPrefix() + "stats")) {
-			long userId = e.getAuthor().getLongID();
-			if (e.getMessage().getMentions().size() > 0
-					&& e.getAuthor().getPermissionsForGuild(e.getGuild()).contains(Permissions.ADMINISTRATOR)) {
-				userId = e.getMessage().getMentions().get(0).getLongID();
-			}
-			if (!DataLinkUtils.getInstance().isLinked(userId)) {
-				if (userId == e.getAuthor().getLongID()) {
-					MessageUtils.sendMessage(e.getChannel(), MessageUtils.getBuilder(
-							e.getAuthor().mention() + ", je hebt jouw discord account niet gelinked!", Color.RED));
-				} else {
-					MessageUtils.sendMessage(e.getChannel(),
-							MessageUtils.getBuilder(Main.getBot().getUserByID(userId).getName() + "#"
-									+ Main.getBot().getUserByID(userId).getDiscriminator()
-									+ " heeft zijn discord account niet gelinked!", Color.RED));
-				}
+    @Override
+    public void excecute(Command cmd, String[] args, Message msg, MessageReceivedEvent event) {
+        long userId = event.getAuthor().getIdLong();
+        if(event.getMessage().getMentions(Message.MentionType.USER).size() > 0 && event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
+            userId = event.getMessage().getMentions(Message.MentionType.USER).get(0).getIdLong();
+        }
+        if (!DataLinkUtils.getInstance().isLinked(userId)) {
+            if (userId == event.getAuthor().getIdLong()) {
+                EmbedBuilder embed = MessageUtils.getBuilder(Color.RED).setDescription(event.getAuthor().getAsTag() + ", je hebt je Discord account nog niet gelinked!");
+                event.getChannel().sendMessage(embed.build()).queue();
+            } else {
+                if (Main.getBot().getUserById(userId) != null) {
+                    EmbedBuilder embed = MessageUtils.getBuilder(Color.RED)
+                            .setDescription(Main.getBot().getUserById(userId).getName()
+                                    + "#"
+                                    + Main.getBot().getUserById(userId).getDiscriminator()
+                                    + " heeft zijn Discord account nog niet gelinked!");
+                    event.getChannel().sendMessage(embed.build()).queue();
+                } else {
+                    EmbedBuilder embed = MessageUtils.getBuilder(Color.RED)
+                            .setDescription("Gebruiker niet gevonden!");
+                    event.getChannel().sendMessage(embed.build()).queue();
+                }
+            }
 
-				return;
-			}
-			OfflinePlayer p = Bukkit.getOfflinePlayer(DataLinkUtils.getInstance().getUUIDFromDiscord(userId));
-			SDBPlayer sdb = SDBPlayer.createSDBPlayer(p);
-			Plugin pl = Bukkit.getPluginManager().getPlugin("MinetopiaSDB");
+            return;
+        }
 
-			EmbedBuilder builder = new EmbedBuilder().withAuthorIcon(ConfigUtils.getInstance().getLogo())
-					.withAuthorName(ConfigUtils.getInstance().getHeader())
-					.withFooterIcon(ConfigUtils.getInstance().getLogo())
-					.withFooterText(ConfigUtils.getInstance().getFooter()).withColor(Color.GREEN);
-			builder.appendField("Speler", p.getName(), false);
+        OfflinePlayer p = Bukkit.getOfflinePlayer(DataLinkUtils.getInstance().getUUIDFromDiscord(userId));
+        SDBPlayer sdb = SDBPlayer.createSDBPlayer(p);
+        Plugin pl = Bukkit.getPluginManager().getPlugin("MinetopiaSDB");
 
-			ConfigUtils cu = ConfigUtils.getInstance();
-			
-			if (cu.getShowOption(ShowOption.FITHEID)) {
-				builder.appendField(cu.getShowTitle(ShowOption.FITHEID), sdb.getFitheid() + "/" + pl.getConfig().getString("Fitheid.Max"), false);
-			}
-			if (cu.getShowOption(ShowOption.PREFIX)) {
-				builder.appendField(cu.getShowTitle(ShowOption.PREFIX), sdb.getPrefix(), false);
-			}
-			if (cu.getShowOption(ShowOption.RANK)) {
-				builder.appendField(cu.getShowTitle(ShowOption.RANK), sdb.getRank(), false);
-			}
-			if (cu.getShowOption(ShowOption.LEVEL)) {
-				builder.appendField(cu.getShowTitle(ShowOption.LEVEL), "" + sdb.getLevel(), false);
-			}
-			if (cu.getShowOption(ShowOption.MONEY)) {
-				builder.appendField(cu.getShowTitle(ShowOption.MONEY), "� " + format(API.getEcon().getBalance(p)), false);
-			}
-			if (cu.getShowOption(ShowOption.ONLINETIME)) {
-				builder.appendField(cu.getShowTitle(ShowOption.ONLINETIME), "" + sdb.getTime(TimeType.DAYS) + " dagen, "
-						+ sdb.getTime(TimeType.HOURS) + " uur, " + sdb.getTime(TimeType.MINUTES) + " minuten", false);
-			}
-			if (cu.getShowOption(ShowOption.ONLINESTATUS)) {
-				builder.appendField(cu.getShowTitle(ShowOption.ONLINESTATUS), p.isOnline() ? "Ja" : "Nee", false);
-			}
-			if (cu.getShowOption(ShowOption.GRAYCOIN)) {
-				builder.appendField(cu.getShowTitle(ShowOption.GRAYCOIN), "" + sdb.getGrayCoins(), false);
-			}
-			MessageUtils.sendMessage(e.getChannel(), builder);
-		}
-	}
+        EmbedBuilder embed = MessageUtils.getBuilder(Color.GREEN);
+        embed.addField("Speler", p.getName(), false);
+
+        ConfigUtils cu = ConfigUtils.getInstance();
+
+        if (cu.getShowOption(ShowOption.FITHEID)) {
+            embed.addField(cu.getShowTitle(ShowOption.FITHEID), sdb.getFitheid() + "/" + pl.getConfig().getString("Fitheid.Max"), false);
+        }
+        if (cu.getShowOption(ShowOption.PREFIX)) {
+            embed.addField(cu.getShowTitle(ShowOption.PREFIX), sdb.getPrefix(), false);
+        }
+        if (cu.getShowOption(ShowOption.RANK)) {
+            embed.addField(cu.getShowTitle(ShowOption.RANK), sdb.getRank(), false);
+        }
+        if (cu.getShowOption(ShowOption.LEVEL)) {
+            embed.addField(cu.getShowTitle(ShowOption.LEVEL), "" + sdb.getLevel(), false);
+        }
+        if (cu.getShowOption(ShowOption.MONEY)) {
+            embed.addField(cu.getShowTitle(ShowOption.MONEY), "€ " + format(API.getEcon().getBalance(p)), false);
+        }
+        if (cu.getShowOption(ShowOption.ONLINETIME)) {
+            embed.addField(cu.getShowTitle(ShowOption.ONLINETIME), "" + sdb.getTime(TimeType.DAYS) + " dagen, "
+                    + sdb.getTime(TimeType.HOURS) + " uur, " + sdb.getTime(TimeType.MINUTES) + " minuten", false);
+        }
+        if (cu.getShowOption(ShowOption.ONLINESTATUS)) {
+            embed.addField(cu.getShowTitle(ShowOption.ONLINESTATUS), p.isOnline() ? "Ja" : "Nee", false);
+        }
+        if (cu.getShowOption(ShowOption.GRAYCOIN)) {
+            embed.addField(cu.getShowTitle(ShowOption.GRAYCOIN), "" + sdb.getGrayCoins(), false);
+        }
+
+        event.getChannel().sendMessage(embed.build()).queue();
+    }
 
 	public static String format(double number) {
 		DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.GERMAN);
