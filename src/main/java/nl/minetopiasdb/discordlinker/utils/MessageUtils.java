@@ -1,51 +1,24 @@
 package nl.minetopiasdb.discordlinker.utils;
 
-import java.awt.Color;
-
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.User;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
-import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.handle.obj.IUser;
-import sx.blah.discord.util.EmbedBuilder;
-import sx.blah.discord.util.RequestBuffer;
+
+import java.awt.*;
 
 public class MessageUtils {
 
-	public static EmbedBuilder getBuilder(String message, Color c) {
-		return new EmbedBuilder().withAuthorIcon(ConfigUtils.getInstance().getLogo())
-				.withAuthorName(ConfigUtils.getInstance().getHeader()).withFooterIcon(ConfigUtils.getInstance().getLogo())
-				.withFooterText(ConfigUtils.getInstance().getFooter()).appendField("\nInformatie:", "\n" + message, true)
-				.withColor(c);
-	}
+    public static EmbedBuilder getBuilder(Color c) {
+        return new EmbedBuilder()
+                .setAuthor(ConfigUtils.getInstance().getHeader(), null, ConfigUtils.getInstance().getLogo())
+                .setFooter(ConfigUtils.getInstance().getFooter(), ConfigUtils.getInstance().getLogo())
+                .setColor(c);
+    }
 
-	public static boolean sendPrivateAndCheckIfCanReceive(IUser user, EmbedBuilder builder) {
-		return RequestBuffer.request(() -> {
-			try {
-				user.getOrCreatePMChannel().sendMessage(builder.build()).getLongID();
-			} catch (Exception ex) {
-				if (ex.getMessage().contains("Received 403 forbidden error for url") || ex.getMessage()
-						.contains("Message was unable to be sent (Discord didn't return a response).")) {
-					return false;
-				}
-			}
-			return true;
-		}).get();
-	}
-	
-	public static void sendMessage(IChannel channel, EmbedBuilder builder) {
-		RequestBuffer.request(() -> {
-			channel.sendMessage(builder.build());
-		});
-	}
-
-	public static void sendMessage(IChannel channel, String msg) {
-		RequestBuffer.request(() -> {
-			channel.sendMessage(msg);
-		});
-	}
-
-	public static void deleteMessage(IUser usr, Long id) {
-		RequestBuffer.request(() -> {
-			usr.getOrCreatePMChannel().getMessageByID(id).delete();
-		});
-	}
+    public void sendPrivateAndCheckIfCanReceive(MessageChannel channel, User user, EmbedBuilder builder) {
+        user.openPrivateChannel().queue((privateChannel) -> {
+            privateChannel.sendMessage(builder.build()).queue();
+        }, new DirectMessageConsumer<Throwable>(user, channel));
+    }
 }
