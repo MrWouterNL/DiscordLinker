@@ -1,6 +1,6 @@
 name: DiscordLinker
-author: MrWouter
-version: 1.1
+authors: [MrWouter, Lucas van Beek]
+version: 2.0
 main: nl.minetopiasdb.discordlinker.Main
 softdepend: [MinetopiaSDB]
 commands: 
