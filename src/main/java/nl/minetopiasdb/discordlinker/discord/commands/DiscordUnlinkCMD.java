@@ -15,6 +15,12 @@ public class DiscordUnlinkCMD implements BotCommand {
     @Override
     public void excecute(Command cmd, String[] args, Message msg, MessageReceivedEvent event) {
         long id = event.getAuthor().getIdLong();
+        if (!DataLinkUtils.getInstance().isLinked(id)) {
+            EmbedBuilder embed = MessageUtils.getBuilder(Color.RED)
+                    .setDescription("Je Discord account is nog niet gelinked!");
+            event.getChannel().sendMessage(embed.build()).queue();
+            return;
+        }
         LinkUtils.getInstance().removeLink(id);
         DataLinkUtils.getInstance().removeLink(id);
         EmbedBuilder embed = MessageUtils.getBuilder(Color.GREEN)
