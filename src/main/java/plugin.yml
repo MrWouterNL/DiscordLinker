@@ -1,0 +1,7 @@
+name: DiscordLinker
+author: MrWouter
+version: 1.1
+main: nl.minetopiasdb.discordbot.Main
+softdepend: [MinetopiaSDB]
+commands: 
+   link:
