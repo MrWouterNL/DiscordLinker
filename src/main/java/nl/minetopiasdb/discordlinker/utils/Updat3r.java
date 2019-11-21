@@ -18,12 +18,11 @@ import java.net.URL;
 
 public class Updat3r {
 
-    private boolean taskRunning = false;
-    private Update update = null;
-
-    private static Updat3r instance = null;
     public static String PROJECT_NAME = "DiscordLinker";
     public static String API_KEY = "aLTA7CwvpYJ9r4shDdLHWcCGBcQSHgUL";
+    private static Updat3r instance = null;
+    private boolean taskRunning = false;
+    private Update update = null;
 
     public static Updat3r getInstance() {
         if (instance == null) {
@@ -37,9 +36,7 @@ public class Updat3r {
             return;
         }
         taskRunning = true;
-        Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), () -> {
-            update = getLatestUpdate(PROJECT_NAME, API_KEY);
-        }, 30 * 20l, 30 * 60 * 20l);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), () -> update = getLatestUpdate(PROJECT_NAME, API_KEY), 30 * 20l, 30 * 60 * 20l);
     }
 
     public Update getLatestUpdate(String project, String apiKey) {
