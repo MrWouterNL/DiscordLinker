@@ -5,3 +5,4 @@ main: nl.minetopiasdb.discordlinker.Main
 softdepend: [MinetopiaSDB]
 commands: 
    link:
+   dclinker:

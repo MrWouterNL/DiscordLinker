@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.managers.Presence;
+import nl.minetopiasdb.discordlinker.bukkit.commands.DCLinkerCMD;
 import nl.minetopiasdb.discordlinker.bukkit.commands.LinkCMD;
 import nl.minetopiasdb.discordlinker.bukkit.listeners.JoinListener;
 import nl.minetopiasdb.discordlinker.discord.commands.*;
@@ -82,6 +83,7 @@ public class Main extends JavaPlugin {
         UserData.getInstance().setup(plugin);
         loginBot();
         getCommand("link").setExecutor(new LinkCMD());
+        getCommand("dclinker").setExecutor(new DCLinkerCMD());
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
         Updat3r.getInstance().startTask();
     }
@@ -100,7 +102,7 @@ public class Main extends JavaPlugin {
                         file.delete();
                     }
                 }
-                getLogger().info("Discord4j not found in libs folder! Downloading..");
+                getLogger().info("JDA not found in libs folder! Downloading..");
                 FileUtils.copyURLToFile(new URL("https://ci.dv8tion.net/job/JDA/62/artifact/build/libs/JDA-4.0.0_62-withDependencies-no-opus.jar"), jdafile, 10000, 10000);
                 if (!jdafile.exists() || jdafile.getTotalSpace() == 0) {
                     getLogger().warning(
