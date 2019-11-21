@@ -82,7 +82,6 @@ public class Main extends JavaPlugin {
         UserData.getInstance().setup(plugin);
         loginBot();
         getCommand("link").setExecutor(new LinkCMD());
-        Bukkit.getPluginManager().registerEvents(new UpdateChecker(), this);
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
     }
 
