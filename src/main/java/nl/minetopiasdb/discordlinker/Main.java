@@ -10,7 +10,7 @@ import nl.minetopiasdb.discordlinker.bukkit.commands.LinkCMD;
 import nl.minetopiasdb.discordlinker.bukkit.listeners.JoinListener;
 import nl.minetopiasdb.discordlinker.discord.commands.*;
 import nl.minetopiasdb.discordlinker.discord.listeners.CommandListener;
-import nl.minetopiasdb.discordlinker.utils.UpdateChecker;
+import nl.minetopiasdb.discordlinker.utils.Updat3r;
 import nl.minetopiasdb.discordlinker.utils.commands.CommandFactory;
 import nl.minetopiasdb.discordlinker.utils.data.ConfigUtils;
 import nl.minetopiasdb.discordlinker.utils.data.UserData;
@@ -83,6 +83,7 @@ public class Main extends JavaPlugin {
         loginBot();
         getCommand("link").setExecutor(new LinkCMD());
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+        Updat3r.getInstance().startTask();
     }
 
     public void loginBot() {
