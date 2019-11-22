@@ -1,0 +1,8 @@
+name: DiscordLinker
+authors: [MrWouter, Lucas van Beek]
+version: 2.0
+main: nl.minetopiasdb.discordlinker.Main
+softdepend: [MinetopiaSDB]
+commands: 
+   link:
+   dclinker:
