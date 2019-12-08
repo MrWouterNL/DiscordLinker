@@ -1,36 +1,24 @@
 # DiscordLinker
-**Idee:** Mogelijkheid maken om een actieve verbinding tussen MC server en Discord server te maken.
+Heb je nou een Minetopia server met een Discord? Dan is deze plugin voor jou. DiscordLinker zorgt voor een verbinding tussen Minecraft en Discord zodat je de statistieken op Discord kunt bekijken.
 
-**Download:** https://projects.minetopiasdb.nl/discordlinker/
+##Setup:
 
+**Stap 1:** Download de laatste DiscordLinker versie [hier](https://github.com/MinetopiaSDB/DiscordLinker/releases).
 
+**Stap 2:** Upload het .jar bestand naar je server.
 
-Setup:
+**Stap 3:** Start je server eens op zodat de config gegenereerd wordt.
 
-Stap 0: Gooi het DiscordLinker.jar bestand in je plugins mapje en start jouw server op.
+**Stap 4:** Ga naar de [Discord Developers](https://discordapp.com/developers/applications) pagina, klik op New en geef je bot een naam. 
 
-Stap 1: [Ga naar de Discord Developer pagina en log indien nodig in.](https://discordapp.com/developers/applications/me)
+**Stap 5:** Klik op het Bot tabje en klik daarna op Add Bot.
 
-Stap 2: Druk op het plus knopje met de tekst 'Create an application'
+**Stap 6:** Zorg ervoor dat het vinkje Public Bot uit staat en kopieer de bot token door op Copy te klikken.
 
-Stap 3: Pas de naam en profielfoto van de bot aan (als je daar zin in hebt.)
+**Stap 7:** Plak de eerder gekopieerde bot token in de DiscordLinker config.
 
-Stap 4: Ga naar het tabje 'Bot' en druk op 'Add Bot'.
+**Stap 8:** Ga in het Discord Developers portal naar het OAuth2 tabje, klik bij Scopes 'Bot' aan en kopieer de gegenereerde link.
 
-Stap 5: Zet het vakje 'Public Bot' uit.
+**Stap 9:** Plak de link in je webbrowser en voeg de bot toe aan je Discord.
 
-Stap 6: Druk op 'Reveal Token'.
-
-Stap 7: Kopieër deze token en plak hem in je config.yml van 'DiscordLinker' en plak hem bij 'BotToken'.
-
-Stap 8: Nu je toch in je config zit, pas gelijk je 'IP' aan. Staat leuker als je straks mt!server gebruikt.
-
-Stap 9: Ga terug naar het tabje 'General Information'
-
-Stap 10: Kopieër je 'CLIENT ID'.
-
-Stap 11: Vervang 'JOUW_ID' met jouw client ID in deze link: https://discordapp.com/oauth2/authorize?client_id=JOUW_ID&scope=bot en ga naar 
-deze link om je bot te inviten.
-
-Stap 12: Herstart je server nu, alles zou moeten werken!
-
+**Stap 10:** Herstart je Minecraft server en veel plezier!
