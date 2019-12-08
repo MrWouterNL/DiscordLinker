@@ -94,7 +94,7 @@ public class Main extends JavaPlugin {
             if (!libs.exists()) {
                 libs.mkdirs();
             }
-            File jdafile = new File(getDataFolder() + File.separator + "libs" + File.separator + "JDA-4.0.0_72.jar");
+            File jdafile = new File(getDataFolder() + File.separator + "libs" + File.separator + "JDA-4.0.0_73.jar");
             if (!jdafile.exists()) {
                 File[] files = libs.listFiles();
                 for (File file : files) {
@@ -103,7 +103,7 @@ public class Main extends JavaPlugin {
                     }
                 }
                 getLogger().info("JDA not found in libs folder! Downloading..");
-                FileUtils.copyURLToFile(new URL("https://ci.dv8tion.net/job/JDA/62/artifact/build/libs/JDA-4.0.0_72-withDependencies-no-opus.jar"), jdafile, 10000, 10000);
+                FileUtils.copyURLToFile(new URL("https://ci.dv8tion.net/job/JDA/73/artifact/build/libs/JDA-4.0.0_73-withDependencies-no-opus.jar"), jdafile, 10000, 10000);
                 if (!jdafile.exists() || jdafile.getTotalSpace() == 0) {
                     getLogger().warning(
                             "Downloading JDA failed, please try again. Are you sure ci.dv8tion.net is accessible?");
