@@ -93,7 +93,8 @@ public class StatCMD implements BotCommand {
             embed.addField(cu.getShowTitle(ShowOption.GRAYCOIN), "" + sdb.getGrayCoins(), false);
         }
         if (cu.getShowOption(ShowOption.LUCKYSHARD)) {
-            embed.addField(cu.getShowTitle(ShowOption.LUCKYSHARD), "" + sdb.getShards(), false);
+            double shards = Math.round(sdb.getShards() * 10000.0) / 10000.0;
+            embed.addField(cu.getShowTitle(ShowOption.LUCKYSHARD), "" + shards, false);
         }
 
         event.getChannel().sendMessage(embed.build()).queue();
