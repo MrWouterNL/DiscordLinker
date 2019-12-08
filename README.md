@@ -1,7 +1,7 @@
 # DiscordLinker
 Heb je nou een Minetopia server met een Discord? Dan is deze plugin voor jou. DiscordLinker zorgt voor een verbinding tussen Minecraft en Discord zodat je de statistieken op Discord kunt bekijken.
 
-##Setup:
+## Setup:
 
 **Stap 1:** Download de laatste DiscordLinker versie [hier](https://github.com/MinetopiaSDB/DiscordLinker/releases).
 
