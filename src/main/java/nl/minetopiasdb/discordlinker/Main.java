@@ -165,7 +165,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
-        if (bot != null && bot.getStatus().isInit()) {
+        if (bot != null) {
             bot.shutdownNow();
         }
     }
