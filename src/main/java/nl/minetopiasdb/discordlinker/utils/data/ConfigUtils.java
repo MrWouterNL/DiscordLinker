@@ -58,6 +58,7 @@ public class ConfigUtils {
         plug.getConfig().addDefault("Discord.StatCMD.Title" + ShowOption.RANK.toString(), "Rank");
         plug.getConfig().addDefault("Discord.StatCMD.Title" + ShowOption.ONLINESTATUS.toString(), "Op dit moment online?");
         plug.getConfig().addDefault("Discord.StatCMD.Title" + ShowOption.GRAYCOIN.toString(), "GrayCoins");
+        plug.getConfig().addDefault("Discord.StatCMD.Title" + ShowOption.LUCKYSHARD.toString(), "LuckyShards");
 
 
         plug.getConfig().options().copyDefaults(true);
@@ -110,6 +111,6 @@ public class ConfigUtils {
 
 
     public enum ShowOption {
-        FITHEID, MONEY, PREFIX, ONLINETIME, LEVEL, RANK, ONLINESTATUS, GRAYCOIN;
+        FITHEID, MONEY, PREFIX, ONLINETIME, LEVEL, RANK, ONLINESTATUS, GRAYCOIN, LUCKYSHARD;
     }
 }

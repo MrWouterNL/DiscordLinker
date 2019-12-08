@@ -92,6 +92,9 @@ public class StatCMD implements BotCommand {
         if (cu.getShowOption(ShowOption.GRAYCOIN)) {
             embed.addField(cu.getShowTitle(ShowOption.GRAYCOIN), "" + sdb.getGrayCoins(), false);
         }
+        if (cu.getShowOption(ShowOption.LUCKYSHARD)) {
+            embed.addField(cu.getShowTitle(ShowOption.LUCKYSHARD), "" + sdb.getShards(), false);
+        }
 
         event.getChannel().sendMessage(embed.build()).queue();
     }
